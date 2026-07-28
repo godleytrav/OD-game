@@ -1,1 +1,12 @@
-{"name":"godaddy-od-game","version":"1.0.0","main":"src/server.js","dependencies":{"express":"^5.2.1"}}
+{
+  "name": "godaddy-od-game",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
