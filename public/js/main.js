@@ -1,6 +1,15 @@
 // Synthetic Web Audio SFX
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
+function unmuteBattleVideo() {
+  const battleVid = document.getElementById('battle-bg-video');
+  const btn = document.getElementById('unmute-battle-btn');
+  if (battleVid) {
+    battleVid.muted = false;
+    battleVid.play().catch(err => console.log(err));
+  }
+  if (btn) btn.style.display = 'none';
+}
 function playClickSound() {
   if (audioCtx.state === 'suspended') audioCtx.resume();
   const osc = audioCtx.createOscillator();
@@ -376,6 +385,7 @@ function setupBattleArena() {
 
 function executePlayerAttack() {
   if (isAttacking) return;
+  unmuteBattleVideo();
   isAttacking = true;
   playAttackSound();
 
