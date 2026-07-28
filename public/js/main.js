@@ -339,7 +339,34 @@ function renderHeroCard() {
   const nextEl = document.getElementById('card-next');
   if (nextEl) nextEl.innerText = p.next;
 }
+// Game Stages: 'QUIZ' -> 'FIGHT' -> 'PARALLAX' -> 'BASE_SCORE'
 
+const [gameStage, setGameStage] = useState('FIGHT'); // Set default or update after quiz
+const [userHeroImage, setUserHeroImage] = useState('/images/heroes/default_hero.png');
+
+const handleFightComplete = () => {
+  // Move straight to Parallax / Base Scene transition
+  setGameStage('PARALLAX');
+};
+
+return (
+  <div>
+    {gameStage === 'FIGHT' && (
+      <FightScene 
+        heroImage={userHeroImage} 
+        onFightComplete={handleFightComplete} 
+      />
+    )}
+
+    {gameStage === 'PARALLAX' && (
+      <ParallaxTransition onComplete={() => setGameStage('BASE_SCORE')} />
+    )}
+
+    {gameStage === 'BASE_SCORE' && (
+      <BaseScoreScreen score={userScore} />
+    )}
+  </div>
+);
 function renderParallaxHub() {
   const p = personas[determinedPersonaKey] || personas["Agile"];
   
