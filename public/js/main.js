@@ -372,6 +372,13 @@ function setupBattleArena() {
   document.getElementById('battle-hero-img').src = p.img;
   document.getElementById('battle-hero-title').innerText = p.title.toUpperCase();
   
+  const battleVid = document.getElementById('battle-bg-video');
+  if (battleVid) {
+    battleVid.currentTime = 0; // Start at beginning
+    battleVid.muted = false;   // Unmute audio
+    battleVid.play().catch(err => console.log("Audio play allowed:", err));
+  }
+  
   monsterHp = 100;
   isAttacking = false;
   document.getElementById('monster-hp-fill').style.width = '100%';
