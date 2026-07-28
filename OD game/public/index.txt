@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoDaddy OD Game | Character Forge</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="game-container">
+    <header>
+      <h1>HERO SELECTION</h1>
+      <p>Configure your archetype and assign your 10 initial growth attributes.</p>
+    </header>
+
+    <main class="creation-screen">
+      <!-- Avatar Display Card -->
+      <section class="avatar-card">
+        <div class="avatar-frame">
+          <img id="hero-avatar" src="/images/avatars/agile_explorer.png" alt="Agile Explorer">
+        </div>
+        <h2 id="persona-title">THE AGILE EXPLORER</h2>
+        <p id="persona-desc">Learns rapidly in high-speed, flexible bursts. Solves immediate problems on the go.</p>
+      </section>
+
+      <!-- Skill Tree Allocation -->
+      <section class="skill-allocation">
+        <h3>ATTRIBUTES (<span id="points-left">10</span> Points Left)</h3>
+        
+        <div class="stat-row">
+          <label>⚡ Speed & Microlearning</label>
+          <div class="controls">
+            <button onclick="adjustStat('speed', -1)">-</button>
+            <span id="stat-speed">0</span>
+            <button onclick="adjustStat('speed', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <label>🧭 Guided Pathways</label>
+          <div class="controls">
+            <button onclick="adjustStat('guided', -1)">-</button>
+            <span id="stat-guided">0</span>
+            <button onclick="adjustStat('guided', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <label>🤝 Social / Cohort</label>
+          <div class="controls">
+            <button onclick="adjustStat('social', -1)">-</button>
+            <span id="stat-social">0</span>
+            <button onclick="adjustStat('social', 1)">+</button>
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <label>🛠️ Hands-On Practice</label>
+          <div class="controls">
+            <button onclick="adjustStat('handsOn', -1)">-</button>
+            <span id="stat-handsOn">0</span>
+            <button onclick="adjustStat('handsOn', 1)">+</button>
+          </div>
+        </div>
+
+        <button id="lock-btn" class="btn-primary" disabled onclick="saveCharacter()">ENTER TRAINING BASE</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The OD Quest | Build Your Perfect Learning Experience</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="game-container">
+    
+    <!-- STAGE 0: LANDING PAGE -->
+    <div id="stage-0" class="stage-screen active">
+      <main class="landing-screen">
+        <div class="landing-backdrop">
+          <img src="/images/Companions/companion_mentor.png" alt="Guild Companion" class="landing-companion-art" onerror="this.style.display='none'">
+        </div>
+        <div class="landing-card glass-panel">
+          <div class="landing-badge">GODADDY OD DIAGNOSTIC</div>
+          <h1>THE OD QUEST</h1>
+          <h3>Build Your Perfect Learning Experience</h3>
+          <p>Learning should fit into your workday, not wrestle it to the ground. Answer seven quick scenarios to discover your workplace learning persona and unlock your ideal development recipe.</p>
+          <button class="btn-primary btn-hero" onclick="startQuest()">EMBARK ON QUEST ⚔️</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- STAGE 1: THE GAMIFIED 7-QUESTION DIAGNOSTIC -->
+    <div id="stage-1" class="stage-screen">
+      <header class="glass-header">
+        <h1 id="quest-stage-title">QUEST 1: THE SPEED TRIAL</h1>
+        <p>Choose what feels most realistic, not what sounds most impressive.</p>
+        <div class="quiz-progress-bar">
+          <div id="quiz-progress-fill" class="fill" style="width: 14%;"></div>
+        </div>
+      </header>
+
+      <main class="quiz-screen">
+        <section class="card quiz-panel glass-panel">
+          <div class="question-header">
+            <span id="question-number">QUEST 1 OF 7</span>
+            <h2 id="question-text">Loading question...</h2>
+          </div>
+
+          <div class="options-list" id="options-container">
+            <!-- Dynamic RPG Ability Cards rendered by main.js -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- STAGE 2: DEDICATED CINEMATIC VIDEO REVEAL -->
+    <div id="stage-2" class="stage-screen">
+      <header class="glass-header">
+        <h1>YOU ARE MOST LIKE:</h1>
+        <h2 id="stage2-persona-title" class="persona-highlight">THE AGILE EXPLORER</h2>
+      </header>
+
+      <main class="video-screen">
+        <div class="video-reveal-container glass-panel">
+          <video id="hero-video" playsinline onerror="handleVideoError()">
+            <source id="hero-video-source" src="/images/videos/agile_explorer.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          
+          <img id="reveal-still-img" class="reveal-still-hidden" src="/images/avatars/agile_explorer.png" alt="Hero Avatar">
+          
+          <button id="unmute-play-btn" class="unmute-overlay-btn" onclick="forcePlayAudio()">🔊 Play Sound & Video</button>
+        </div>
+
+        <button id="skip-video-btn" class="btn-primary" onclick="goToStage(3)">VIEW FULL LEARNING RECIPE ➔</button>
+      </main>
+    </div>
+
+    <!-- STAGE 3: HERO CARD WITH STILL AVATAR -->
+    <div id="stage-3" class="stage-screen">
+      <header class="glass-header">
+        <h1>YOUR LEARNING PERSONA RESULT</h1>
+        <p>Tips for choosing experiences that work for you</p>
+      </header>
+
+      <main class="hero-card-screen">
+        <div class="hero-card glass-panel">
+          <div class="hero-card-header">
+            <div class="hero-card-art-wrap">
+              <img id="card-hero-img" src="/images/avatars/agile_explorer.png" alt="Hero Persona">
+            </div>
+            <div class="hero-card-title-box">
+              <h2 id="card-hero-title">THE AGILE EXPLORER</h2>
+              <p id="card-hero-desc">Persona description...</p>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="hero-recipe-grid">
+            <div class="recipe-box">
+              <h4>⚡ Your Ideal Learning Recipe</h4>
+              <p id="card-recipe"></p>
+            </div>
+            <div class="recipe-box">
+              <h4>⚠️ Potential Learning Trap</h4>
+              <p id="card-trap"></p>
+            </div>
+            <div class="recipe-box">
+              <h4>🔍 Experiences to Look For</h4>
+              <p id="card-experiences"></p>
+            </div>
+            <div class="recipe-box">
+              <h4>🎯 Try This Next</h4>
+              <p id="card-next"></p>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="skill-signal-box">
+            <label for="skill-input">💡 <strong>Optional Follow-Up:</strong> What is one skill you would most like to build over the next six months?</label>
+            <div class="skill-input-group">
+              <input type="text" id="skill-input" placeholder="e.g., Strategic Leadership, Data Analysis, Coaching...">
+              <button class="btn-primary" onclick="submitFullProfile()">SUBMIT & SEE SUMMARY ➔</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- STAGE 4: SUMMARY & REPORT CONFIRMATION -->
+    <div id="stage-4" class="stage-screen">
+      <header class="glass-header">
+        <h1>PROFILE SAVED TO L&D ANALYTICS</h1>
+        <p>Thank you for defining your perfect learning experience.</p>
+      </header>
+
+      <main class="summary-screen">
+        <div class="summary-card glass-panel">
+          <h2>🎉 Diagnostic Successfully Logged!</h2>
+          <p>Your responses help GoDaddy L&D design experiences that fit into your workday.</p>
+          <div class="report-link-box">
+            <p><strong>L&D Analytics Report Access:</strong> <a href="/api/od-analytics" target="_blank">View Live Data (/api/od-analytics)</a></p>
+          </div>
+          <button class="btn-primary restart-btn" onclick="location.reload()">TAKE QUIZ AGAIN 🔄</button>
+        </div>
+      </main>
+    </div>
+
+  </div>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>
