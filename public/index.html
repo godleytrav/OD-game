@@ -43,7 +43,7 @@
           </div>
 
           <div class="options-list" id="options-container">
-            <!-- Dynamic RPG Ability Cards rendered by main.js -->
+            <!-- Dynamic RPG Ability Cards -->
           </div>
         </section>
       </main>
@@ -118,28 +118,70 @@
             <label for="skill-input">💡 <strong>Optional Follow-Up:</strong> What is one skill you would most like to build over the next six months?</label>
             <div class="skill-input-group">
               <input type="text" id="skill-input" placeholder="e.g., Strategic Leadership, Data Analysis, Coaching...">
-              <button class="btn-primary" onclick="submitFullProfile()">SUBMIT & SEE SUMMARY ➔</button>
+              <button class="btn-primary" onclick="submitFullProfile()">ENTER TRAINING BASE 🏰 ➔</button>
             </div>
           </div>
         </div>
       </main>
     </div>
 
-    <!-- STAGE 4: SUMMARY & REPORT CONFIRMATION -->
+    <!-- STAGE 4: MOUSE-TRACKING PARALLAX TRAINING BASE -->
     <div id="stage-4" class="stage-screen">
-      <header class="glass-header">
-        <h1>PROFILE SAVED TO L&D ANALYTICS</h1>
-        <p>Thank you for defining your perfect learning experience.</p>
+      <header class="glass-header hub-header">
+        <div class="hub-header-left">
+          <span class="hub-badge">LEVEL 1 HQ</span>
+          <h1 id="base-welcome-title">THE AGILE EXPLORER BASE</h1>
+        </div>
+        <div class="hub-header-right">
+          <a href="/api/od-analytics" target="_blank" class="btn-secondary">📊 L&D Analytics</a>
+          <button class="btn-primary" onclick="location.reload()">RESTART QUEST 🔄</button>
+        </div>
       </header>
 
-      <main class="summary-screen">
-        <div class="summary-card glass-panel">
-          <h2>🎉 Diagnostic Successfully Logged!</h2>
-          <p>Your responses help GoDaddy L&D design experiences that fit into your workday.</p>
-          <div class="report-link-box">
-            <p><strong>L&D Analytics Report Access:</strong> <a href="/api/od-analytics" target="_blank">View Live Data (/api/od-analytics)</a></p>
+      <main class="parallax-viewport" id="parallax-viewport">
+        <!-- LAYER 1: BACKGROUND GRID / ATMOSPHERE -->
+        <div class="parallax-layer layer-bg" data-speed="-0.03">
+          <div class="grid-backdrop"></div>
+        </div>
+
+        <!-- LAYER 2: MIDGROUND INTERACTIVE FACILITIES -->
+        <div class="parallax-layer layer-mg" data-speed="-0.06">
+          <div class="facilities-grid">
+            <div class="facility-card glass-panel" onclick="openFacilityModal('sandbox')">
+              <div class="facility-icon-wrap">
+                <img src="/images/base/facility_sandbox.png" alt="Sandbox Facility" onerror="this.src='/images/icons/icon_sandbox.png'">
+              </div>
+              <h4>Simulation Sandbox</h4>
+              <p>Practice low-risk scenarios & interactive tools</p>
+            </div>
+
+            <div class="facility-card glass-panel" onclick="openFacilityModal('archives')">
+              <div class="facility-icon-wrap">
+                <img src="/images/base/facility_archives.png" alt="Archives Facility" onerror="this.src='/images/icons/icon_archives.png'">
+              </div>
+              <h4>Knowledge Archives</h4>
+              <p>Curated pathways, checklists, & field guides</p>
+            </div>
+
+            <div class="facility-card glass-panel" onclick="openFacilityModal('guild')">
+              <div class="facility-icon-wrap">
+                <img src="/images/Companions/companion_facilitator.png" alt="Guild Hall" class="facility-companion-img">
+              </div>
+              <h4>Social Guild Hall</h4>
+              <p>Connect with mentors, expert panels & cohorts</p>
+            </div>
           </div>
-          <button class="btn-primary restart-btn" onclick="location.reload()">TAKE QUIZ AGAIN 🔄</button>
+        </div>
+
+        <!-- LAYER 3: FOREGROUND HERO AVATAR & HUD -->
+        <div class="parallax-layer layer-fg" data-speed="-0.12">
+          <div class="hero-stand-container">
+            <img id="parallax-hero-img" src="/images/avatars/agile_explorer.png" alt="Standing Hero" class="hero-stand-img">
+            <div class="hero-stat-badge glass-panel">
+              <span id="parallax-hero-name">THE AGILE EXPLORER</span>
+              <small id="parallax-villain-target">Target Villain: The Calendar Kraken</small>
+            </div>
+          </div>
         </div>
       </main>
     </div>

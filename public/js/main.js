@@ -1,4 +1,4 @@
-// Synthetic Web Audio SFX (Zero File Dependencies)
+// Synthetic Web Audio SFX
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function playClickSound() {
@@ -16,7 +16,26 @@ function playClickSound() {
   osc.stop(audioCtx.currentTime + 0.08);
 }
 
-// 100% VERBATIM QUIZ DATA FROM DOCX FILE WITH RPG FRAMEWORK
+// MOUSE PARALLAX CONTROLLER
+document.addEventListener('mousemove', (e) => {
+  const viewport = document.getElementById('parallax-viewport');
+  if (!viewport) return;
+  
+  const rect = viewport.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  
+  const deltaX = (e.clientX - centerX) / (rect.width / 2);
+  const deltaY = (e.clientY - centerY) / (rect.height / 2);
+
+  document.querySelectorAll('.parallax-layer').forEach(layer => {
+    const speed = parseFloat(layer.getAttribute('data-speed')) || 0.05;
+    const moveX = deltaX * speed * 120;
+    const moveY = deltaY * speed * 120;
+    layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+  });
+});
+
 const quizQuestions = [
   {
     id: "q1",
@@ -290,7 +309,6 @@ function forcePlayAudio() {
 }
 
 function handleVideoError() {
-  console.log("Video error, displaying avatar still.");
   const videoEl = document.getElementById('hero-video');
   const stillImgEl = document.getElementById('reveal-still-img');
   if (videoEl) videoEl.style.display = 'none';
@@ -322,6 +340,27 @@ function renderHeroCard() {
   if (nextEl) nextEl.innerText = p.next;
 }
 
+function renderParallaxHub() {
+  const p = personas[determinedPersonaKey] || personas["Agile"];
+  
+  document.getElementById('base-welcome-title').innerText = `${p.title.toUpperCase()} HQ`;
+  document.getElementById('parallax-hero-name').innerText = p.title;
+  document.getElementById('parallax-hero-img').src = p.img;
+  document.getElementById('parallax-villain-target').innerText = `Target Barrier: ${selectedVillain}`;
+}
+
+function openFacilityModal(facilityType) {
+  playClickSound();
+  const p = personas[determinedPersonaKey];
+  if (facilityType === 'sandbox') {
+    alert(`🎮 SIMULATION SANDBOX\n\nTailored for ${p.title}:\n${p.experiences}\n\nRecommended Practice: ${p.next}`);
+  } else if (facilityType === 'archives') {
+    alert(`📜 KNOWLEDGE ARCHIVES\n\nYour Ideal Recipe:\n${p.recipe}\n\nWatch out for: ${p.trap}`);
+  } else if (facilityType === 'guild') {
+    alert(`🤝 SOCIAL GUILD HALL\n\nConnect with GoDaddy L&D Facilitators & Peers to bypass "${selectedVillain}".`);
+  }
+}
+
 async function submitFullProfile() {
   playClickSound();
   const skillSignal = document.getElementById('skill-input').value.trim() || "Not specified";
@@ -347,6 +386,7 @@ async function submitFullProfile() {
     console.error("Save error:", err);
   }
 
+  renderParallaxHub();
   goToStage(4);
 }
 
