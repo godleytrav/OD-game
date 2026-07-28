@@ -43,7 +43,7 @@
           </div>
 
           <div class="options-list" id="options-container">
-            <!-- Dynamic RPG Ability Cards -->
+            <!-- Dynamic Options -->
           </div>
         </section>
       </main>
@@ -125,11 +125,12 @@
       </main>
     </div>
 
-    <!-- STAGE 4: MOUSE-TRACKING PARALLAX TRAINING BASE -->
-    <div id="stage-4" class="stage-screen">
-      <header class="glass-header hub-header">
+    <!-- STAGE 4: TRUE 2.5D PARALLAX TRAINING BASE -->
+    <div id="stage-4" class="stage-screen stage-full-bleed">
+      <!-- Floating Top HUD Header -->
+      <header class="hud-header glass-panel">
         <div class="hub-header-left">
-          <span class="hub-badge">LEVEL 1 HQ</span>
+          <span class="hub-badge">LEVEL 1 BASE HQ</span>
           <h1 id="base-welcome-title">THE AGILE EXPLORER BASE</h1>
         </div>
         <div class="hub-header-right">
@@ -138,51 +139,54 @@
         </div>
       </header>
 
-      <main class="parallax-viewport" id="parallax-viewport">
-        <!-- LAYER 1: BACKGROUND GRID / ATMOSPHERE -->
-        <div class="parallax-layer layer-bg" data-speed="-0.03">
-          <div class="grid-backdrop"></div>
+      <!-- 2.5D SCENE VIEWPORT -->
+      <main class="scene-25d-viewport" id="parallax-viewport">
+        
+        <!-- LAYER 1: FAR BACKGROUND (ENVIRONMENT) -->
+        <div class="parallax-layer layer-far" data-speed="0.02">
+          <!-- Put your full-screen background image here! (e.g. /images/base/base_bg.png) -->
+          <img id="scene-bg-img" src="/images/base/base_bg.png" alt="Base Environment" class="bg-full-scene" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23050811\'/></svg>'">
         </div>
 
-        <!-- LAYER 2: MIDGROUND INTERACTIVE FACILITIES -->
-        <div class="parallax-layer layer-mg" data-speed="-0.06">
-          <div class="facilities-grid">
-            <div class="facility-card glass-panel" onclick="openFacilityModal('sandbox')">
-              <div class="facility-icon-wrap">
-                <img src="/images/base/facility_sandbox.png" alt="Sandbox Facility" onerror="this.src='/images/icons/icon_sandbox.png'">
+        <!-- LAYER 2: MIDGROUND BUILDINGS/FACILITIES -->
+        <div class="parallax-layer layer-mid" data-speed="0.05">
+          <div class="facilities-world-container">
+            
+            <div class="world-facility-building" onclick="openFacilityModal('sandbox')">
+              <img src="/images/base/facility_sandbox.png" alt="Sandbox Facility" class="building-sprite" onerror="this.style.display='none'">
+              <div class="building-label-tag glass-panel">
+                <span>🎮 Simulation Sandbox</span>
               </div>
-              <h4>Simulation Sandbox</h4>
-              <p>Practice low-risk scenarios & interactive tools</p>
             </div>
 
-            <div class="facility-card glass-panel" onclick="openFacilityModal('archives')">
-              <div class="facility-icon-wrap">
-                <img src="/images/base/facility_archives.png" alt="Archives Facility" onerror="this.src='/images/icons/icon_archives.png'">
+            <div class="world-facility-building" onclick="openFacilityModal('archives')">
+              <img src="/images/base/facility_archives.png" alt="Archives Facility" class="building-sprite" onerror="this.style.display='none'">
+              <div class="building-label-tag glass-panel">
+                <span>📜 Knowledge Archives</span>
               </div>
-              <h4>Knowledge Archives</h4>
-              <p>Curated pathways, checklists, & field guides</p>
             </div>
 
-            <div class="facility-card glass-panel" onclick="openFacilityModal('guild')">
-              <div class="facility-icon-wrap">
-                <img src="/images/Companions/companion_facilitator.png" alt="Guild Hall" class="facility-companion-img">
+            <div class="world-facility-building" onclick="openFacilityModal('guild')">
+              <img src="/images/Companions/companion_facilitator.png" alt="Guild Hall" class="building-sprite companion-building" onerror="this.style.display='none'">
+              <div class="building-label-tag glass-panel">
+                <span>🤝 Social Guild Hall</span>
               </div>
-              <h4>Social Guild Hall</h4>
-              <p>Connect with mentors, expert panels & cohorts</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- LAYER 3: FOREGROUND HERO CUT-OUT & STATS -->
+        <div class="parallax-layer layer-near" data-speed="0.10">
+          <div class="foreground-hero-stage">
+            <img id="parallax-hero-img" src="/images/avatars/agile_explorer.png" alt="Standing Hero Cutout" class="hero-cutout-sprite">
+            <div class="hero-hud-card glass-panel">
+              <h3 id="parallax-hero-name">THE AGILE EXPLORER</h3>
+              <p id="parallax-villain-target">Target Barrier: The Calendar Kraken</p>
             </div>
           </div>
         </div>
 
-        <!-- LAYER 3: FOREGROUND HERO AVATAR & HUD -->
-        <div class="parallax-layer layer-fg" data-speed="-0.12">
-          <div class="hero-stand-container">
-            <img id="parallax-hero-img" src="/images/avatars/agile_explorer.png" alt="Standing Hero" class="hero-stand-img">
-            <div class="hero-stat-badge glass-panel">
-              <span id="parallax-hero-name">THE AGILE EXPLORER</span>
-              <small id="parallax-villain-target">Target Villain: The Calendar Kraken</small>
-            </div>
-          </div>
-        </div>
       </main>
     </div>
 
