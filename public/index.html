@@ -118,11 +118,57 @@
             <label for="skill-input">💡 <strong>Optional Follow-Up:</strong> What is one skill you would most like to build over the next six months?</label>
             <div class="skill-input-group">
               <input type="text" id="skill-input" placeholder="e.g., Strategic Leadership, Data Analysis, Coaching...">
-              <button class="btn-primary" onclick="submitFullProfile()">ENTER TRAINING BASE 🏰 ➔</button>
+              <button class="btn-primary" onclick="submitFullProfile()">ENTER BOSS BATTLE ⚔️ ➔</button>
             </div>
           </div>
         </div>
       </main>
+    </div>
+
+    <!-- STAGE 3.5: MONSTER BATTLE ARENA -->
+    <div id="stage-battle" class="stage-screen stage-full-bleed">
+      <div class="battle-viewport">
+        <!-- Background Boss Video -->
+        <video id="battle-bg-video" autoplay loop muted playsinline class="battle-bg-video">
+          <source src="/images/videos/format_friction.mp4" type="video/mp4">
+        </video>
+
+        <div class="battle-overlay">
+          <header class="hud-header glass-panel">
+            <span class="hub-badge battle-badge">BOSS ENCOUNTER</span>
+            <h2>CONFRONTING THE WORKPLACE BARRIER</h2>
+          </header>
+
+          <!-- Arena Combatants -->
+          <main class="battle-arena">
+            <!-- Hero Side -->
+            <div class="fighter-card glass-panel">
+              <span class="fighter-tag hero-tag">YOUR HERO</span>
+              <img id="battle-hero-img" src="/images/avatars/agile_explorer.png" alt="Hero Fighter" class="fighter-avatar">
+              <h4 id="battle-hero-title">THE AGILE EXPLORER</h4>
+              <div class="hp-bar-bg"><div id="hero-hp-fill" class="hp-bar-fill hp-hero"></div></div>
+              <span id="hero-hp-text" class="hp-num">HP: 100 / 100</span>
+            </div>
+
+            <div class="vs-badge">VS</div>
+
+            <!-- Monster Side -->
+            <div class="fighter-card glass-panel">
+              <span class="fighter-tag monster-tag">WORKPLACE BARRIER</span>
+              <img src="/images/monsters/format_friction.png" alt="Format Friction" class="fighter-avatar monster-avatar" onerror="this.src='/images/monsters/calendar_kraken.png'">
+              <h4>FORMAT FRICTION</h4>
+              <div class="hp-bar-bg"><div id="monster-hp-fill" class="hp-bar-fill hp-monster"></div></div>
+              <span id="monster-hp-text" class="hp-num">HP: 100 / 100</span>
+            </div>
+          </main>
+
+          <!-- Battle HUD Action Footer -->
+          <footer class="battle-hud-panel glass-panel">
+            <p id="battle-log-text">⚠️ FORMAT FRICTION HAS BLOCKED YOUR LEARNING PATH!</p>
+            <button id="attack-btn" class="btn-primary btn-attack" onclick="executePlayerAttack()">ATTACK WITH LEARNING RECIPE ⚡</button>
+          </footer>
+        </div>
+      </div>
     </div>
 
     <!-- STAGE 4: TRUE 2.5D PARALLAX TRAINING BASE -->
@@ -141,17 +187,14 @@
 
       <!-- 2.5D SCENE VIEWPORT -->
       <main class="scene-25d-viewport" id="parallax-viewport">
-        
         <!-- LAYER 1: FAR BACKGROUND (ENVIRONMENT) -->
         <div class="parallax-layer layer-far" data-speed="0.02">
-          <!-- Put your full-screen background image here! (e.g. /images/base/base_bg.png) -->
           <img id="scene-bg-img" src="/images/base/base_bg.png" alt="Base Environment" class="bg-full-scene" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\'><rect width=\'100%\' height=\'100%\' fill=\'%23050811\'/></svg>'">
         </div>
 
         <!-- LAYER 2: MIDGROUND BUILDINGS/FACILITIES -->
         <div class="parallax-layer layer-mid" data-speed="0.05">
           <div class="facilities-world-container">
-            
             <div class="world-facility-building" onclick="openFacilityModal('sandbox')">
               <img src="/images/base/facility_sandbox.png" alt="Sandbox Facility" class="building-sprite" onerror="this.style.display='none'">
               <div class="building-label-tag glass-panel">
@@ -172,7 +215,6 @@
                 <span>🤝 Social Guild Hall</span>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -182,11 +224,10 @@
             <img id="parallax-hero-img" src="/images/avatars/agile_explorer.png" alt="Standing Hero Cutout" class="hero-cutout-sprite">
             <div class="hero-hud-card glass-panel">
               <h3 id="parallax-hero-name">THE AGILE EXPLORER</h3>
-              <p id="parallax-villain-target">Target Barrier: The Calendar Kraken</p>
+              <p id="parallax-villain-target">Status: Format Friction Defeated 🎉</p>
             </div>
           </div>
         </div>
-
       </main>
     </div>
 

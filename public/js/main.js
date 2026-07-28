@@ -16,6 +16,21 @@ function playClickSound() {
   osc.stop(audioCtx.currentTime + 0.08);
 }
 
+function playAttackSound() {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.3);
+  gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
 // MOUSE PARALLAX CONTROLLER
 document.addEventListener('mousemove', (e) => {
   const viewport = document.getElementById('parallax-viewport');
@@ -183,6 +198,9 @@ let selectedVillain = "The Calendar Kraken";
 let determinedPersonaKey = "Agile";
 let userQuizAnswers = {};
 
+let monsterHp = 100;
+let isAttacking = false;
+
 function startQuest() {
   playClickSound();
   goToStage(1);
@@ -340,13 +358,62 @@ function renderHeroCard() {
   if (nextEl) nextEl.innerText = p.next;
 }
 
+function setupBattleArena() {
+  const p = personas[determinedPersonaKey] || personas["Agile"];
+  document.getElementById('battle-hero-img').src = p.img;
+  document.getElementById('battle-hero-title').innerText = p.title.toUpperCase();
+  
+  monsterHp = 100;
+  isAttacking = false;
+  document.getElementById('monster-hp-fill').style.width = '100%';
+  document.getElementById('monster-hp-text').innerText = 'HP: 100 / 100';
+  document.getElementById('battle-log-text').innerText = `⚠️ FORMAT FRICTION ATTEMPTS TO BLOCK YOUR WORKDAY!`;
+  
+  const attackBtn = document.getElementById('attack-btn');
+  attackBtn.style.display = 'inline-block';
+  attackBtn.innerText = 'ATTACK WITH LEARNING RECIPE ⚡';
+}
+
+function executePlayerAttack() {
+  if (isAttacking) return;
+  isAttacking = true;
+  playAttackSound();
+
+  const logEl = document.getElementById('battle-log-text');
+  const p = personas[determinedPersonaKey];
+  logEl.innerText = `💥 ${p.title} deployed custom learning recipe! It's super effective!`;
+
+  monsterHp -= 50;
+  if (monsterHp < 0) monsterHp = 0;
+
+  document.getElementById('monster-hp-fill').style.width = `${monsterHp}%`;
+  document.getElementById('monster-hp-text').innerText = `HP: ${monsterHp} / 100`;
+
+  if (monsterHp <= 0) {
+    setTimeout(() => {
+      playClickSound();
+      logEl.innerText = `🎉 VICTORY! FORMAT FRICTION BANISHED FROM YOUR WORKDAY!`;
+      document.getElementById('attack-btn').style.display = 'none';
+      
+      setTimeout(() => {
+        renderParallaxHub();
+        goToStage(4);
+      }, 1500);
+    }, 600);
+  } else {
+    setTimeout(() => {
+      isAttacking = false;
+      logEl.innerText = `⚡ Strike again to clear the barrier!`;
+    }, 1000);
+  }
+}
+
 function renderParallaxHub() {
   const p = personas[determinedPersonaKey] || personas["Agile"];
   
   document.getElementById('base-welcome-title').innerText = `${p.title.toUpperCase()} HQ`;
   document.getElementById('parallax-hero-name').innerText = p.title;
   document.getElementById('parallax-hero-img').src = p.img;
-  document.getElementById('parallax-villain-target').innerText = `Target Barrier: ${selectedVillain}`;
 }
 
 function openFacilityModal(facilityType) {
@@ -357,7 +424,7 @@ function openFacilityModal(facilityType) {
   } else if (facilityType === 'archives') {
     alert(`📜 KNOWLEDGE ARCHIVES\n\nYour Ideal Recipe:\n${p.recipe}\n\nWatch out for: ${p.trap}`);
   } else if (facilityType === 'guild') {
-    alert(`🤝 SOCIAL GUILD HALL\n\nConnect with GoDaddy L&D Facilitators & Peers to bypass "${selectedVillain}".`);
+    alert(`🤝 SOCIAL GUILD HALL\n\nConnect with GoDaddy L&D Facilitators & Peers to stay ahead!`);
   }
 }
 
@@ -386,13 +453,18 @@ async function submitFullProfile() {
     console.error("Save error:", err);
   }
 
-  renderParallaxHub();
-  goToStage(4);
+  setupBattleArena();
+  goToStage('battle');
 }
 
 function goToStage(stageNum) {
   document.querySelectorAll('.stage-screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(`stage-${stageNum}`).classList.add('active');
+  
+  if (stageNum === 'battle') {
+    document.getElementById('stage-battle').classList.add('active');
+  } else {
+    document.getElementById(`stage-${stageNum}`).classList.add('active');
+  }
 
   if (stageNum === 3) {
     renderHeroCard();
