@@ -4,9 +4,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// Serve static assets from public folder
 app.use(express.static(path.join(__dirname, '../public')));
 
-// In-memory analytics store for pilot demo
+// In-memory analytics store
 const odAnalytics = [];
 
 app.post('/api/character-build', (req, res) => {
@@ -23,6 +25,11 @@ app.get('/api/od-analytics', (req, res) => {
   });
 });
 
+// Fallback route to serve index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`OD Quest Server running on port ${PORT}`);
 });
